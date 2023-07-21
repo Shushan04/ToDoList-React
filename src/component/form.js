@@ -1,9 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import React from "react";
 import {v4 as uuidv4} from 'uuid';
 
 const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
-   // Function to update an existing todo item based on its ID.
+  const [searchInput, setSearchInput] = useState("");
+
+  // Function to update an existing todo item based on its ID.
   const updateTodo = (title, id, completed) => {
     const newTodo = todos.map((todo) => 
       todo.id === id ? {title, id, completed} : todo
@@ -11,6 +13,8 @@ const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
     setTodos(newTodo);
     setEditTodo("");
   }
+
+
   // useEffect hook to handle the side effect of editing a todo item.
   useEffect(() => {
     if(editTodo){
@@ -19,6 +23,8 @@ const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
       setInput("")
     }
   },[setInput, editTodo]);
+  //-------------------
+ 
 
  // Event handler to update the input state whenever the input field value changes.
   const onInputChange = (event) => {
@@ -35,6 +41,13 @@ const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
       updateTodo(input, editTodo.id, editTodo.completed)
     }
 
+  };
+  // Function to handle search and update the filtered todos.
+  const handleSearch = () => {
+    const filteredTodos = todos.filter((todo) =>
+      todo.title.toLowerCase().includes(searchInput.toLowerCase())
+    );
+    setTodos(filteredTodos);
   };
 
   return (
@@ -53,11 +66,14 @@ const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
             {editTodo ? "Update" : "Add"}
         </button>
         <input
-         type="text"
-         placeholder="Search Name..."
-         className="task-input"
+          type="text"
+          placeholder="Search Name..."
+          className="task-input"
+          value={searchInput}
+          required
+          onChange={(e) => setSearchInput(e.target.value)}
         />
-        <button className="search-button" type="button">
+        <button className="search-button" type="button" onClick={handleSearch}>
           Search
         </button>
 
@@ -67,6 +83,5 @@ const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
 };
 
 export default Form;
-
 
 
