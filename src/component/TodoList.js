@@ -1,9 +1,31 @@
 import React from "react";
 
+const TodosList = ({ todos, setTodos, setEditTodo }) => {
+  // Function to mark a todo as complete or incomplete.
+  const handleComplete = (todo) => {
+    setTodos(
+      todos.map((item) => {
+        if(item.id === todo.id){
+          return {...item, completed: !item.completed }
+        }else{
+          return item;
+        }
+        
+      })
+    )
+  }
 
-const TodosList = ({ todos, setTodos}) => {
+    // Function to set the currently edited todo.
+  const handleEdit = ({id}) => {
+    const findTodo = todos.find((todo) => todo.id === id);
+    setEditTodo(findTodo);
+  }
 
-
+  // Function to delete a todo from the list.
+  const handelDelete = ({id}) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+  
 
   return (
     <div>
@@ -37,6 +59,7 @@ const TodosList = ({ todos, setTodos}) => {
 };
 
 export default TodosList;
+
 
 
 
