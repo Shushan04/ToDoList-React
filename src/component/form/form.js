@@ -3,7 +3,8 @@ import React from "react";
 import {v4 as uuidv4} from 'uuid';
 
 const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
-  const [searchInput, setSearchInput] = useState("");
+ // const [searchInput, setSearchInput] = useState("");
+  
 
   // Function to update an existing todo item based on its ID.
   const updateTodo = (title, id, completed) => {
@@ -42,13 +43,16 @@ const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
     }
 
   };
+
+
   // Function to handle search and update the filtered todos.
-  const handleSearch = () => {
-    const filteredTodos = todos.filter((todo) =>
-      todo.title.toLowerCase().includes(searchInput.toLowerCase())
-    );
-    setTodos(filteredTodos);
-  };
+  // const handleSearch = () => {
+  //   const filteredTodos = todos.filter((todo) =>
+  //     todo.title.toLowerCase().includes(searchInput.toLowerCase())
+  //   );
+  //   setTodos(filteredTodos);
+  // };
+
 
   return (
     <div>
@@ -69,11 +73,12 @@ const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
           type="text"
           placeholder="Search Name..."
           className="task-input"
-          value={searchInput}
-          required
-          onChange={(e) => setSearchInput(e.target.value)}
+          // value={searchInput}
+          // required
+          // onChange={(e) => setSearchInput(e.target.value)}
         />
-        <button className="search-button" type="button" onClick={handleSearch}>
+         <button className="search-button" type="button">
+        {/* <button className="search-button" type="button" onClick={handleSearch}> */}
           Search
         </button>
 
@@ -83,4 +88,5 @@ const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
 };
 
 export default Form;
+
 
