@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Header from "./component/header";
-import Form from "./component/form";
-import TodosList from "./component/TodoList";
+import Header from "./component/header/header";
+import Form from "./component/form/form";
+import TodosList from "./component/TodoList/TodoList";
 import './app.css';
 
 const App = () =>{
